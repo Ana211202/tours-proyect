@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter  } from '@angular/core';
 
 @Component({
   selector: 'app-tour-list',
   templateUrl: './tour-list.component.html',
   styleUrls: ['./tour-list.component.css']
 })
-export class TourListComponent implements OnInit {
+export class TourListComponent {
+  @Input() tour: any;
+  @Output() reserve = new EventEmitter<any>();
 
-  constructor() { }
-
-  ngOnInit(): void {
+  reserveTour() {
+    localStorage.setItem('reservedTour', JSON.stringify(this.tour));
+    this.reserve.emit(this.tour);
   }
 
 }
